@@ -23,5 +23,11 @@
     "eslint-plugin-vue": "^4.0.0"
   },
   "main": ".eslintrc.js",
-  "license": "ISC"
+  "license": "ISC",
+  "config": {
+    "nuxt": {
+      "host": "127.0.0.1",
+      "port": "1818"
+    }
+  }
 }
