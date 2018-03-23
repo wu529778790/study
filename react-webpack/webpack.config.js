@@ -14,5 +14,15 @@ module.exports = {
         host: ip,
         compress: true,
         port: 8080
-    }
+    },
+    loaders: [
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loaders: 'babel-loader',
+            query: {
+                presets: ['2015', 'react']
+            }
+        }
+    ]
 }
