@@ -14,7 +14,8 @@ module.exports = {
     ]
   },
   css: [
-    './assets/css/normailze.css'
+    './assets/css/normailze.css',
+    './assets/css/main.css'
   ],
   /*
   ** Customize the progress bar color
