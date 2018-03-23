@@ -1,5 +1,6 @@
 <template>
   <div>
+    神族九帝
     <nuxt/>
   </div>
 </template>

@@ -13,6 +13,19 @@
 export default {
   validate ({params}) {
       return /^\d+$/.test(params.id)
+  },
+  data () {
+      return {
+          title: this.$route.params.title || 'shenzujiudi'
+      }
+  },
+  head () {
+      return {
+          title: this.title,
+          meta: [
+              {hid: 'description', name: 'news', content: 'this is news page'}
+          ]
+      }
   }
 }
 </script>
