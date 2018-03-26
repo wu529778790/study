@@ -8,7 +8,7 @@ const NavBar = () => (
         Shenzjd
       </NavLink>{' '}
       | &nbsp;
-      <NavLink exact to="/Shenzjdb" activeClassName="active">
+      <NavLink exact to="/Shenzjdb/ILoveWeb" activeClassName="active">
         Shenzjdb
       </NavLink>{' '}
       | &nbsp;

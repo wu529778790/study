@@ -13,7 +13,7 @@ ReactDom.render(
       <Nav />
       <Switch>
         <Route exact path="/" component={Shenzjd} />
-        <Route exact path="/Shenzjdb" component={Shenzjdb} />
+        <Route exact path="/Shenzjdb/:param" component={Shenzjdb} />
         <Route exact path="/Shenzjdc" component={Shenzjdc} />
         <Redirect from="/redirect" to="/Shenzjdb" />
         <Route component={Error} />
