@@ -23,7 +23,7 @@ const NavBar = () => (
       <NavLink to="/sdfsdaf" activeClassName="active">
         404
       </NavLink>{' '}
-      | &nbsp;
+      | &nbsp; 
     </div>
   </div>
 );

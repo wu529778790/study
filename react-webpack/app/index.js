@@ -15,7 +15,7 @@ ReactDom.render(
         <Route exact path="/" component={Shenzjd} />
         <Route exact path="/Shenzjdb/:param" component={Shenzjdb} />
         <Route exact path="/Shenzjdc" component={Shenzjdc} />
-        <Redirect from="/redirect" to="/Shenzjdb" />
+        <Redirect from="/redirect" to="/Shenzjdc" />
         <Route component={Error} />
       </Switch>
     </div>
