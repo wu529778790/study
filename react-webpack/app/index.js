@@ -1,7 +1,7 @@
-function component () {
-    var element = document.createElement('div')
-    element.innerHTML = '神族九s帝'
-    return element
-}
+import React from 'react'
+import ReactDom from 'react-dom'
 
-document.body.appendChild(component())
+ReactDom.render(
+    <div>hello wolrd</div>,
+    document.getElementById('app')
+)
