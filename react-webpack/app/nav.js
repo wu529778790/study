@@ -16,6 +16,14 @@ const NavBar = () => (
         Shenzjdc
       </NavLink>{' '}
       | &nbsp;
+      <NavLink to="/redirect" activeClassName="active">
+        Redirect
+      </NavLink>{' '}
+      | &nbsp;
+      <NavLink to="/sdfsdaf" activeClassName="active">
+        404
+      </NavLink>{' '}
+      | &nbsp;
     </div>
   </div>
 );
