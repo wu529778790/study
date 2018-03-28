@@ -222,3 +222,166 @@ new CopyWebpackPlugin([
   }
 ])
 ```
+
+# webpack高级
+
+## css tree Shaking 
+```
+yarn add purify-css purifycss-webpack -d
+const glob = require('glob')
+const PurifyCSSPlugin = require('purifycss-webpack')
+// 去除无用的css
+plugins: [
+    new PurifyCSSPlugin({
+        // 路径扫描nodejs内置路径检查
+        paths: glob.sync(path.join(__dirname, 'pages/*/*.html))
+    })
+]
+```
+## js优化
+```
+yarn add webpack-parallel-uglify-plugin -D
+const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+plugins: [
+    new WebpackParallelUglifyPlugin({
+      uglifyJS: {
+        output: {
+          beautify: false, //不需要格式化
+          comments: false //不保留注释
+        },
+        compress: {
+          warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+          drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
+          collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+          reduce_vars: true // 提取出出现多次但是没有定义成变量去引用的静态值
+        }
+      }
+    })
+]
+```
+## 提取公共代码
+```
+// webpack4最新配置，可以搜索关键字查查配置项
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0, // This is example is too small to create commons chunks
+          name: 'common'
+        }
+      }
+    }
+  },
+```
+## 打包第三方类库
+DllPlugin插件： 用于打包出一个个动态连接库
+DllReferencePlugin: 在配置文件中引入DllPlugin插件打包好的动态连接库
+```
+在package.json中
+  "scripts": {
+    "build": "webpack --mode development",
+    "build:dll": "webpack --config webpack.dll.config.js --mode development",
+    "dev": "webpack-dev-server --open --mode development"
+  }
+新建webpack.dll.config.js  
+const path = require('path')
+const webpack = require('webpack')
+
+/**
+ * 尽量减小搜索范围
+ * target: '_dll_[name]' 指定导出变量名字
+ */
+
+ module.exports = {
+   entry: {
+     vendor: ['jquery', 'lodash']
+   },
+   output: {
+     path: path.join(__dirname, 'static'),
+     filename: '[name].dll.js',
+     library: '_dll_[name]' // 全局变量名，其他模块会从此变量上获取里面模块
+   },
+   // manifest是描述文件
+   plugins: [
+     new webpack.DllPlugin({
+       name: '_dll_[name]',
+       path: path.join(__dirname, 'manifest.json')
+     })
+   ]
+ }
+
+ 在webpack.config.js中
+plugins: [
+    new webpack.DllReferencePlugin({
+        manifest: path.join(__dirname, 'manifest.json')
+    })
+]
+执行npm run build:dll 就可以打包第三方包了
+
+```
+## 使用happypack
+HappyPack就能让Webpack把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程。 happypack
+```
+npm i happypack@next -D
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
+  {
+    test: /\.js$/,
+    // loader: 'babel-loader',
+    loader: 'happypack/loader?id=happy-babel-js', // 增加新的HappyPack构建loader
+    include: [resolve('src')],
+    exclude: /node_modules/,
+  }
+  
+  plugins: [
+    new HappyPack({
+      id: 'happy-babel-js',
+      loaders: ['babel-loader?cacheDirectory=true'],
+      threadPool: happyThreadPool
+    })
+]
+```
+## 显示打包时间
+```
+yarn add progress-bar-webpack-plugin -D
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+plugins: [
+    new ProgressBarPlugin({
+      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
+    })
+]
+```
+## 多页配置
+```
+  entry: { //entry是一个字符串或者数组都是单页，是对象则是多页，这里是index页和base页
+    index: './pages/index/index.js',
+    base: './pages/base/base.js'
+  }
+  
+  一个页面对应一个html模板，在plugin中
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './pages/index/index.html',
+      filename: 'pages/index.html',
+      hash: true,
+      chunks: ['index', 'common'],
+      minify: {
+        removeAttributeQuotes: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: './pages/base/base.html',
+      filename: 'pages/base.html',
+      hash: true,
+      chunks: ['base', 'common'],
+      minify: {
+        removeAttributeQuotes: true
+      }
+    }),
+  ]
+```
