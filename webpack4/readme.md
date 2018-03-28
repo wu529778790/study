@@ -385,3 +385,103 @@ plugins: [
     }),
   ]
 ```
+下面是一个完整的多页配置
+```
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const Webpack = require('webpack')
+const glob = require('glob')
+const PurifyCSSPlugin = require('purifycss-webpack')
+
+// let cssExtract = new ExtractTextWebpackPlugin('static/css/[name].css')
+
+module.exports = {
+  entry: {
+    index: './pages/index/index.js',
+    base: './pages/base/base.js'
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    // name是entry的名字main，hash是根据打包后的文件内容计算出来的hash值
+    filename: 'static/js/[name].[hash].js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/, 
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader']
+        })
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['env', 'stage-0', 'react'] 
+          }
+        }
+      }
+    ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0, // This is example is too small to create commons chunks
+          name: 'common'
+        }
+      }
+    }
+  },
+  plugins: [
+    new CleanWebpackPlugin([path.join(__dirname, 'dist')]),
+    new HtmlWebpackPlugin({
+      template: './pages/index/index.html',
+      filename: 'pages/index.html',
+      hash: true,
+      chunks: ['index', 'common'],
+      minify: {
+        removeAttributeQuotes: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: './pages/base/base.html',
+      filename: 'pages/base.html',
+      hash: true,
+      chunks: ['base', 'common'],
+      minify: {
+        removeAttributeQuotes: true
+      }
+    }),
+    new ExtractTextWebpackPlugin({
+      filename: 'static/css/[name].[hash].css'
+    }),
+    new PurifyCSSPlugin({
+      // 路劲扫描 nodejs内置 路劲检查
+      paths: glob.sync(path.join(__dirname, 'pages/*/*.html'))
+    })
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    port: 9090,
+    host: 'localhost',
+    overlay: true,
+    compress: true // 服务器返回浏览器的时候是否启动gzip压缩
+  }
+}
+```
+## vue-cli几个重要路径
+
+```
+assetsRoot:构建输出目录 也就是构建后的东西都扔这里
+assetsSubDirectory:资源子目录(static) 除了index.html，其余的js img css都分在这里
+assetsPublicPath:项目目录 一个杠杠(/) 啥意思呢，是根目录的意思
+```
