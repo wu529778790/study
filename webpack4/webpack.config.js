@@ -47,7 +47,19 @@ module.exports = {
 						limit: 5 * 1024
 					}
 				}
-			} 
+			},
+			{
+				test: /\.css$/,
+				// css-loader用来处理css中url的路径
+				// style-loader可以把css文件变成style标签插入到head中
+				// 多个loader是有顺序要求的，从右往左写，因为转换的时候是从右往左转换的
+				// 此插件先用css-loader 处理一下css文件
+				use: ExtractTextWebpackPlugin.extract({
+					fallback: 'style-loader',
+					// 如果需要，可以再sass-loader之前将resolve-url-loader链接进来
+					use: ['css-loader', 'postcss-loader']
+				})
+			}
     ]
   },
   plugins: [

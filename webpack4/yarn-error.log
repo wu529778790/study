@@ -1,5 +1,5 @@
 Arguments: 
-  D:\Program Files\nodejs\node.exe D:\Program Files (x86)\Yarn\bin\yarn.js add extract-webpack-plugin -d
+  D:\Program Files\nodejs\node.exe D:\Program Files (x86)\Yarn\bin\yarn.js add post-css-loader -d
 
 PATH: 
   C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\Program Files\Git\cmd;D:\Program Files\nodejs\;D:\Program Files\MongoDB\Server\3.6\bin;D:\coding\flutter\bin;D:\Program Files (x86)\Yarn\bin\;C:\Users\52977\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Microsoft VS Code\bin;C:\Users\52977\AppData\Roaming\npm;D:\dart-sdk\bin;"D:\Program Files\Android\Android\Sdk\tools;D:\Program Files\Android\Android\Sdk\platform-tools";D:\nginx;C:\Users\52977\AppData\Local\Yarn\bin
@@ -30,8 +30,11 @@ npm manifest:
       "babel-preset-react": "^6.24.1",
       "babel-preset-stage-0": "^6.24.1",
       "css-loader": "^0.28.11",
-      "extract-text-webpack-plugin": "^3.0.2",
+      "extract-text-webpack-plugin": "^4.0.0-beta.0",
+      "file-loader": "^1.1.11",
+      "mini-css-extract-plugin": "^0.2.0",
       "style-loader": "^0.20.3",
+      "url-loader": "^1.0.1",
       "webpack": "^4.3.0",
       "webpack-cli": "^2.0.13",
       "webpack-dev-server": "^3.1.1"
@@ -81,15 +84,6 @@ Lockfile:
     dependencies:
       co "^4.6.0"
       json-stable-stringify "^1.0.1"
-  
-  ajv@^5.0.0:
-    version "5.5.2"
-    resolved "http://registry.npm.taobao.org/ajv/download/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
-    dependencies:
-      co "^4.6.0"
-      fast-deep-equal "^1.0.0"
-      fast-json-stable-stringify "^2.0.0"
-      json-schema-traverse "^0.3.0"
   
   ajv@^6.1.0:
     version "6.4.0"
@@ -2300,14 +2294,14 @@ Lockfile:
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
   
-  extract-text-webpack-plugin@^3.0.2:
-    version "3.0.2"
-    resolved "http://registry.npm.taobao.org/extract-text-webpack-plugin/download/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
+  extract-text-webpack-plugin@^4.0.0-beta.0:
+    version "4.0.0-beta.0"
+    resolved "http://registry.npm.taobao.org/extract-text-webpack-plugin/download/extract-text-webpack-plugin-4.0.0-beta.0.tgz#f7361d7ff430b42961f8d1321ba8c1757b5d4c42"
     dependencies:
       async "^2.4.1"
       loader-utils "^1.1.0"
-      schema-utils "^0.3.0"
-      webpack-sources "^1.0.1"
+      schema-utils "^0.4.5"
+      webpack-sources "^1.1.0"
   
   extsprintf@1.3.0:
     version "1.3.0"
@@ -2353,6 +2347,13 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/figures/download/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
     dependencies:
       escape-string-regexp "^1.0.5"
+  
+  file-loader@^1.1.11:
+    version "1.1.11"
+    resolved "http://registry.npm.taobao.org/file-loader/download/file-loader-1.1.11.tgz#6fe886449b0f2a936e43cabaac0cdbfb369506f8"
+    dependencies:
+      loader-utils "^1.0.2"
+      schema-utils "^0.4.5"
   
   filename-regex@^2.0.0:
     version "2.0.1"
@@ -3792,7 +3793,7 @@ Lockfile:
     version "1.4.1"
     resolved "http://registry.npm.taobao.org/mime/download/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   
-  mime@^2.1.0:
+  mime@^2.0.3, mime@^2.1.0:
     version "2.2.0"
     resolved "http://registry.npm.taobao.org/mime/download/mime-2.2.0.tgz#161e541965551d3b549fa1114391e3a3d55b923b"
   
@@ -3803,6 +3804,13 @@ Lockfile:
   mimic-response@^1.0.0:
     version "1.0.0"
     resolved "http://registry.npm.taobao.org/mimic-response/download/mimic-response-1.0.0.tgz#df3d3652a73fded6b9b0b24146e6fd052353458e"
+  
+  mini-css-extract-plugin@^0.2.0:
+    version "0.2.0"
+    resolved "http://registry.npm.taobao.org/mini-css-extract-plugin/download/mini-css-extract-plugin-0.2.0.tgz#7a16b0e1096c86de8e4d1c3b063aa1aeae88d41d"
+    dependencies:
+      loader-utils "^1.1.0"
+      webpack-sources "^1.1.0"
   
   minimalistic-assert@^1.0.0:
     version "1.0.0"
@@ -5166,13 +5174,7 @@ Lockfile:
     version "1.2.4"
     resolved "http://registry.npm.taobao.org/sax/download/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   
-  schema-utils@^0.3.0:
-    version "0.3.0"
-    resolved "http://registry.npm.taobao.org/schema-utils/download/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
-    dependencies:
-      ajv "^5.0.0"
-  
-  schema-utils@^0.4.2, schema-utils@^0.4.5:
+  schema-utils@^0.4.2, schema-utils@^0.4.3, schema-utils@^0.4.5:
     version "0.4.5"
     resolved "http://registry.npm.taobao.org/schema-utils/download/schema-utils-0.4.5.tgz#21836f0608aac17b78f9e3e24daff14a5ca13a3e"
     dependencies:
@@ -5899,6 +5901,14 @@ Lockfile:
     version "4.0.0"
     resolved "http://registry.npm.taobao.org/url-join/download/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
   
+  url-loader@^1.0.1:
+    version "1.0.1"
+    resolved "http://registry.npm.taobao.org/url-loader/download/url-loader-1.0.1.tgz#61bc53f1f184d7343da2728a1289ef8722ea45ee"
+    dependencies:
+      loader-utils "^1.1.0"
+      mime "^2.0.3"
+      schema-utils "^0.4.3"
+  
   url-parse-lax@^1.0.0:
     version "1.0.0"
     resolved "http://registry.npm.taobao.org/url-parse-lax/download/url-parse-lax-1.0.0.tgz#7af8f303645e9bd79a272e7a14ac68bc0609da73"
@@ -6332,7 +6342,7 @@ Lockfile:
       yeoman-environment "^2.0.5"
 
 Trace: 
-  Error: Couldn't find package "extract-webpack-plugin" on the "npm" registry.
+  Error: Couldn't find package "post-css-loader" on the "npm" registry.
       at new MessageError (D:\Program Files (x86)\Yarn\lib\cli.js:186:110)
       at NpmResolver.<anonymous> (D:\Program Files (x86)\Yarn\lib\cli.js:51625:15)
       at Generator.next (<anonymous>)
