@@ -486,4 +486,6 @@ assetsSubDirectory:资源子目录(static) 除了index.html，其余的js img cs
 assetsPublicPath:项目目录 一个杠杠(/) 啥意思呢，是根目录的意思
 ```
 
-参考：https://juejin.im/post/5ab79fa75188255582525400?utm_source=gold_browser_extension
+参考：
+1. https://juejin.im/post/5ab79fa75188255582525400?utm_source=gold_browser_extension
+2. https://segmentfault.com/a/1190000013998339
