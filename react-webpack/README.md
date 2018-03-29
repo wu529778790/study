@@ -28,3 +28,58 @@ MemoryRouter：不存储history，所有路由过程保存在内存里，不能�
 NativeRouter：经常配合ReactNative使用，多用于移动端，以后ReactNative课程中会详细讲解。
 StaticRouter：设置静态路由，需要和后台服务器配合设置，比如设置服务端渲染时使用。
 ```
+# react 纪要
+```
+jsx与html的不同
+class 属性变为 className
+tabindex 属性变为 tabIndex
+for 属性变为 htmlFor
+textarea 的值通过需要通过 value 属性来指定
+style 属性的值接收一个对象，css 的属性变为驼峰写法，如：backgroundColor。
+```
+
+```
+组件的名称首字母必须为大写
+属性必须为只读的
+
+<div>Hello {this.props.name || 'World'}.</div> 属性可能是个object
+
+import React, {Component} from 'react';
+
+class HelloMessage extends Component {
+    render() {
+        return <div>Hello {this.props.name}.</div>;
+    }
+}
+HelloMessage.defaultProps = {
+    name: 'World'
+}
+```
+```
+属性的类型及校验
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+class HelloMessage extends Component {
+    render() {
+        return <div>Hello {this.props.name}.</div>;
+    }
+}
+HelloMessage.defaultProps = {
+    name: 'World'
+}
+HelloMessage.propTypes = {
+    name: PropTypes.string
+}
+```
+```
+ReactDOM.render 在一个单页面 web 应用中通常只调用一次。
+
+组件可以通过 setState 改变内部状态 state 来更新视图。
+
+setState 多数情况下是异步的。
+
+不要直接使用当前 state 的值生成下一个 state。
+
+不要直接通过 this.state 修改 state。
+```
