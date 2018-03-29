@@ -83,7 +83,7 @@ setState 多数情况下是异步的。
 
 不要直接通过 this.state 修改 state。
 ```
-### 生命周期函数
+# 生命周期函数
 
 1. 组件初始化： constructor
 ```
@@ -166,4 +166,69 @@ componentDidCatch(error, info)
 这是 React 16 新加入的一个生命周期函数。定义该生命周期函数的组件将会成为一个错误边界，错误边界这个词非常形象，它可以有效地将错误限制在一个有限的范围内，而不会导致整个应用崩溃，防止一颗耗子屎坏了一锅汤。
 
 错误边界组件，可以捕获其整个子组件树内发生的任何异常，但是却不能捕获自身的异常。
+```
+
+# 事件处理
+
+1. react内置组建的事件处理
+```
+属性名称采用驼峰式（如：onClick，onKeyDown），而不是全小写字母。
+
+属性值接受一个函数，而不是字符串。
+
+return false; 不会阻止组件的默认行为，需要调用 e.preventDefault();
+
+ 
+```
+2. 不要在异步过程中使用 React 事件对象
+```
+需要说明的是，出于性能的考虑，React 并不是为每一个事件处理函数生成一个全新的事件对象，事件对象会被复用，当事件处理函数被执行以后，
+事件对象的所有属性会被设置为 null，所以在事件处理函数中，
+你不能以异步的方式使用 React 的事件对象，
+因为那时候事件对象的所有属性都是 null 了，或者已经不是你关心的那个事件了。
+```
+3. 尽量不要使用 addEventListener
+React 内部自己实现了一套高效的事件机制，为了提高框架的性能，React 通过 DOM 事件冒泡，只在 document 节点上注册原生的 DOM 事件，React 内部自己管理所有组件的事件处理函数，以及事件的冒泡、捕获。
+
+如果你通过 addEventListener 注册了某个 DOM 节点的某事件处理函数，并且通过 e.stopPropagation(); 阻断了事件的冒泡或者捕获，那么该节点下的所有节点上，同类型的 React 事件处理函数都会失效。
+
+
+如下示例，虽然设置的链接的点击事件，但是它却执行不了
+```
+class CounterLink extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount() {
+    document.querySelector('.my-link').addEventListener('click', (e) => {
+      console.info('raw click');
+      e.stopPropagation();
+    })
+  }
+  handleClick(e) {
+    e.preventDefault();
+    console.info('react click');
+    this.setState({ count: this.state.count + 1 });
+  }
+  render() {
+    return (
+      <div className="my-link">
+        <a href="#" onClick={this.handleClick}>Clicked me {this.state.count} times.</a>    
+      </div>
+    )
+  }
+}
+ReactDOM.render(<CounterLink/>, document.querySelector("#root"));
+```
+# Redux
+
+```
+    1. 维护一个数据仓库（store）管理整个应用的状态（state），确保数据的唯一来源。
+    2. 可以通过 dispatch 方法分发一个 action，来通知 Redux 需要对数据进行变更。
+    3. Redux 接收到 action 后可以依据 action 的类型对 state 进行相应的修改。
+    4. 数据跟新后 Redux 会触发注册的监听器（如：更新组件属性），完成视图更新。
 ```
