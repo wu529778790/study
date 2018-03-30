@@ -13,7 +13,7 @@
 
 ![动图演示](img/bubbleSort.gif)
 
-## js 实现
+## 3. js 实现
 
 ```
 function bubbleSort(arr) {
