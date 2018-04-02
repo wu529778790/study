@@ -1,6 +1,6 @@
 # 个人学习目录
 ## [nuxt](./nuxt)
-## [react](./react)
+## [react](./react-webpack)
 ## [nginx](./nginx)
-## [webapck4](./webapck4)
+## [webpack4](./webpack4)
 ## [Sort](./sort)
