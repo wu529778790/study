@@ -1,0 +1,41 @@
+//暂时性解决diolag 问题 https://github.com/ElemeFE/element/issues/2461
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+}
+.el-menu--collapse .el-menu-item span,
+.el-menu--collapse .el-submenu .el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
+
+//element ui loading
+.el-loading-mask.is-fullscreen {
+  //  top: 50px;
+  left: 180px;
+}
+
+.top-loading {
+  .el-loading-spinner {
+    top: 10%;
+  }
+}
+
+.left-loading {
+  .el-loading-spinner {
+    left: 5%;
+    width: auto;
+  }
+}
+
+.right-loading {
+  .el-loading-spinner {
+    right: 5%;
+    width: auto;
+  }
+}
