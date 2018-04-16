@@ -1,9 +1,5 @@
 /*
  * 封装el-upload，上传自动补充占位，含图片压缩
- * @Author: liangzc 
- * @Date: 2018-04-13 17:50:42 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-13 17:53:24
  */
 <template>
   <div class="uploader-scss">

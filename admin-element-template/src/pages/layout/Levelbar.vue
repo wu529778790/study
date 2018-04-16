@@ -1,8 +1,5 @@
 /*
  * 快捷导航
- * @Date: 2018-04-13 17:46:06 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:46:06 
  */
 <template>
   <el-breadcrumb class="app-levelbar"

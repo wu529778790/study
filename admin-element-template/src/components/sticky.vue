@@ -1,8 +1,5 @@
 /*
  * 滚动悬停组件
- * @Date: 2018-04-13 17:51:53 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-13 17:53:09
  */
 <template>
   <div :style="{height:height+'px',zIndex:zIndex}">

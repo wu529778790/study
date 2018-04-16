@@ -1,10 +1,3 @@
-/*
- * Axios 公共请求处理
- * @Author: liangzc 
- * @Date: 2018-04-13 17:47:37 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:47:37 
- */
 import axios from 'axios';
 import router from '@/router';
 import store from '@/store';

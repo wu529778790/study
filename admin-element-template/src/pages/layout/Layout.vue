@@ -1,8 +1,5 @@
 /*
  * 右侧布局
- * @Date: 2018-04-13 17:45:56 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-16 10:30:15
  */
 <template>
   <div class="app-wrapper"

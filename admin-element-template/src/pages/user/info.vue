@@ -1,9 +1,5 @@
 /*
  * 用户信息
- * @Author: liangzc 
- * @Date: 2018-04-13 17:55:11 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:55:11 
  */
 <template>
   <el-form :inline="true"

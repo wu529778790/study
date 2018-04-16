@@ -1,8 +1,5 @@
 /*
  * @Author: liangzc 
- * @Date: 2017-07-31 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-02-13 14:54:18
  */
 /**
  * @param {Vue} Vue

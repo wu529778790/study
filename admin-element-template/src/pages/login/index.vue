@@ -1,9 +1,5 @@
 /*
  * 系统登录
- * @Author: liangzc 
- * @Date: 2018-04-13 17:47:30 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-16 10:31:44
  */
 <template>
   <div class="login-container">

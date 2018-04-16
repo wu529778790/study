@@ -1,8 +1,5 @@
 /*
  * 404
- * @Date: 2018-04-13 17:54:29 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:54:29 
  */
 <template>
   <div style="background:#f0f2f5;margin-top: -20px;">

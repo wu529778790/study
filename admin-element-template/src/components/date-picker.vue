@@ -1,10 +1,3 @@
-/*
- * 封装el-date-picker
- * @Author: liangzc 
- * @Date: 2018-04-13 17:49:44 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:49:44 
- */
 <template>
   <el-date-picker v-model="date"
     :type="type"

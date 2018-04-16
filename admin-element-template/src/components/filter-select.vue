@@ -1,9 +1,5 @@
 /*
  * 封装远程数据过滤组件
- * @Author: liangzc 
- * @Date: 2018-04-13 17:48:35 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-13 17:49:02
  */
 <template>
   <el-select v-model="selected"

@@ -1,8 +1,5 @@
 /*
  * 内层侧边栏（具体菜单）
- * @Date: 2018-04-13 17:47:03 
- * @Last Modified by: liangzc
- * @Last Modified time: 2018-04-16 10:46:12
  */
 <template>
   <div class="menu-wrapper">

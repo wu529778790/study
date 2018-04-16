@@ -1,8 +1,5 @@
 /*
  * 汉堡包图标（切换导航展开与收起）
- * @Date: 2018-04-13 17:51:34 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:51:34 
  */
 <template>
   <div>

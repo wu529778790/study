@@ -1,9 +1,5 @@
 /*
  * 公共占位页
- * @Author: liangzc 
- * @Date: 2018-04-13 17:53:57 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:53:57 
  */
 <template>
   <section>

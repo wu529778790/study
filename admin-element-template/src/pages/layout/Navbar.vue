@@ -1,8 +1,5 @@
 /*
  * 顶栏
- * @Date: 2018-04-13 17:46:31 
- * @Last Modified by: wu529778790
- * @Last Modified time: 2018-04-16 11:36:02
  */
 <template>
   <div class="navbar"

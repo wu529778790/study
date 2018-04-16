@@ -1,8 +1,5 @@
 /*
  * 错误日志页
- * @Date: 2018-04-13 17:54:09 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:54:09 
  */
 <template>
   <div class="errPage-container">

@@ -1,8 +1,5 @@
 /*
  * 401
- * @Date: 2018-04-13 17:54:23 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:54:23 
  */
 <template>
   <div class="errPage-container">

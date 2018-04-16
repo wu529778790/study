@@ -1,8 +1,5 @@
 /*
  * 历史视图
- * @Date: 2018-04-13 17:47:19 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:47:19 
  */
 <template>
   <div class="tabs-view-container">

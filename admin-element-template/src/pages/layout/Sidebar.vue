@@ -1,8 +1,5 @@
 /*
  * 外层侧边栏
- * @Date: 2018-04-13 17:46:44 
- * @Last Modified by:   liangzc 
- * @Last Modified time: 2018-04-13 17:46:44 
  */
 <template>
   <el-menu router
