@@ -32,7 +32,7 @@ module.exports = {
     notifyOnErrors: true,
     proxyTable: {
       '/v1': {
-        target: 'http://dev.phtonspark.com/api/v1', //设置调用接口域名和端口号别忘了加http
+        target: '', //设置调用接口域名和端口号别忘了加http
         changeOrigin: true,
         pathRewrite: {
           '^/v1': '/' //这里理解成用‘/v1’代替target里面的地址，组件中我们调接口时直接用v1代替
