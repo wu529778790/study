@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "babel-plugin-import": "^1.7.0",
-    "vant": "^1.0.7",
+    "vant": "^1.0.8",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
