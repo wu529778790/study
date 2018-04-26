@@ -1,0 +1,11 @@
+{
+  "name": "shenzjd.com",
+  "version": "1.0.0",
+  "description": "神族九帝个人博客",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev blog",
+    "build": "vuepress build blog"
+  }
+}
