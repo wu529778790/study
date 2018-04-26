@@ -2,7 +2,7 @@ module.exports = {
   title: '神族九帝',
   description: '永不言弃',
   dest: 'dist',
-  base: '/blog/',
+  base: '/study/vuepress/',
   themeConfig: {
     repo: 'https://github.com/wu529778790/blog'
   },
