@@ -6,7 +6,7 @@ Status: building...
 
 ## Docs
 
-- [tutorial](/docs/tutorial.md)
+- [tutorial](https://github.com/wu529778790/study/blob/master/vue-develop-template/docs/tutorial.md)
 
 ## Start
 
