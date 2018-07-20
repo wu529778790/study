@@ -168,3 +168,190 @@ CompileUtil = {
 到现在为止 就完成了数据的绑定，也就是说 new Vue 实例中的 data 已经可以正确显示在页面中了，现在要解决的就是如何实现双向绑定
 
 结合开篇的 vue 编译过程的图可以知道我们还少一个 observe 数据劫持，添加 Watcher 监听, 以发布-订阅者模式来重写 data 属性
+
+# 实现双向绑定
+
+## Observer 类的添加
+
+新建 Observer.js 文件 步骤：
+
+- 构造器中添加直接进行 observe
+- 判断 data 是否存在, 是否是个对象
+- 将数据一一劫持，获取 data 中的 key 和 value
+
+```
+class Observer {
+    constructor(data) {
+        this.observe(data)
+    }
+
+    observe(data) {
+        // 要对这个数据将原有的属性改成 set 和 get 的形式
+        if (!data || typeof data !== 'object') {
+            return
+        }
+        // 将数据一一劫持
+        Object.keys(data).forEach(key => {
+            // 劫持
+            this.defineReactive(data, key, data[key])
+            this.observe(data[key]) //递归深度劫持
+        })
+    }
+
+    defineReactive(obj, key, value) {
+        let that = this
+        Object.defineProperty(obj, key, {
+            enumerable: true,
+            configurable: true,
+            get() { // 取值时调用的方法
+                return value
+            },
+            set(newValue) { // 当给data属性中设置的时候，更改属性的值
+                if (newValue !== value) {
+                    // 这里的this不是实例
+                    that.observe(newValue) // 如果是对象继续劫持
+                    value = newValue
+                }
+            }
+        })
+    }
+}
+```
+
+虽然有了 observer，但是并未关联,以及通知变化。下面就添加 Watcher 类
+
+## Watcher 类的添加
+
+新建 watcher.js 文件
+
+观察者的目的就是给需要变化的那个元素增加一个观察者，当数据变化后执行对应的方法
+
+```
+class Watcher {
+    // 观察者的目的就是给需要变化的那个元素增加一个观察者，当数据变化后执行对应的方法
+    // this.$watch(vm, 'a', function(){...})
+    constructor(vm, expr, cb) {
+        this.vm = vm;
+        this.expr = expr;
+        this.cb = cb;
+
+        // 先获取下老的值
+        this.value = this.get();
+    }
+
+    getVal(vm, expr) { // 获取实例上对应的数据
+        expr = expr.split('.');
+        return expr.reduce((prev, next) => { //vm.$data.a
+            return prev[next]
+        }, vm.$data)
+    }
+
+    get() {
+        Dep.target = this;
+        let value = this.getVal(this.vm, this.expr);
+        Dep.target = null;
+        return value
+    }
+
+    // 对外暴露的方法
+    update(){
+        let newValue = this.getVal(this.vm, this.expr);
+        let oldValue = this.value
+
+        if(newValue !== oldValue){
+            this.cb(newValue); // 对应 watch 的callback
+        }
+    }
+}
+```
+
+Dep 是干嘛的？ 监控、实例的发布订阅属性的一个类，我们可以添加到 observer.js 中
+
+```
+class Observer{
+    //...
+    defineReactive(obj, key, value){
+        let that = this;
+        let dep = new Dep(); // 每个变化的数据 都会对应一个数组，这个数组存放所有更新的操作
+        Object.defineProperty(obj, key, {
+            //...
+            get(){
+                Dep.target && dep.addSub(Dep.target)
+                //...
+            }
+             set(newValue){
+                 if (newValue !== value) {
+                    // 这里的this不是实例
+                    that.observe(newValue) // 如果是对象继续劫持
+                    value = newValue;
+                    dep.notify(); //通知所有人更新了
+                }
+             }
+        })
+    }
+}
+class Dep {
+    constructor() {
+        // 订阅的数组
+        this.subs = []
+    }
+
+    addSub(watcher) {
+        this.subs.push(watcher)
+    }
+
+    notify() {
+        this.subs.forEach(watcher => watcher.update())
+    }
+}
+```
+
+此时 应该在 compile.js 中的 compileUtil 的 model 添加一个监控，简单来讲就是在输入框中添加监控
+
+```
+class Compile{
+    //...
+}
+CompileUtil = {
+    //...
+    text(node, vm, expr) { // 文本处理 参数 [节点, vm 实例, 指令的属性值]
+        let updateFn = this.updater['textUpdater'];
+        let value = this.getTextVal(vm, expr)
+        updateFn && updateFn(node, value)
+
+        expr.replace(/\{\{([^}]+)\}\}/g, (...arguments) => {
+            new Watcher(vm, arguments[1], () => {
+                // 如果数据变化了，文本节点需要重新获取依赖的属性更新文本中的内容
+                updateFn && updateFn(node, this.getTextVal(vm, expr))
+            })
+        })
+    },
+     setVal(vm, expr, value) {
+        expr = expr.split('.');
+        // 收敛
+        return expr.reduce((prev, next, currentIndex) => {
+            if (currentIndex === expr.length - 1) {
+                return prev[next] = value
+            }
+            return prev[next]
+        }, vm.$data)
+    },
+     model(node, vm, expr) { // 输入框处理
+        let updateFn = this.updater['modelUpdater'];
+        // 这里应该加一个监控，数据变化了，应该调用watch 的callback
+        new Watcher(vm, expr, (newValue) => {
+            // 当值变化后会调用cb 将newValue传递过来（）
+            updateFn && updateFn(node, this.getVal(vm, expr))
+        });
+
+        node.addEventListener('input', e => {
+            let newValue = e.target.value;
+            this.setVal(vm, expr, newValue)
+        })
+        updateFn && updateFn(node, this.getVal(vm, expr))
+    },
+    //...
+}
+```
+
+以上代码 就完成了发布订阅者模式,简单的实现。。也就是说双向绑定的目标已经完成了
