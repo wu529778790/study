@@ -1,10 +1,18 @@
+# 简介
+
+慕课网 Mpvue 全栈课程，需要资源的自取
+
+http://shenzjd.com/archives/643
+
+课程介绍：https://coding.imooc.com/class/218.html
+
 # mpvue
 
 > A Mpvue project
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
