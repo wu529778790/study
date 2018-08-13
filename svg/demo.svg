@@ -1,0 +1,4 @@
+<img src="circle.svg">
+<object id="object" data="circle.svg" type="image/svg+xml"></object>
+<embed id="embed" src="icon.svg" type="image/svg+xml">
+<iframe id="iframe" src="icon.svg"></iframe>
