@@ -1,0 +1,10 @@
+
+<template name="tempHeader">
+  <view class="header">
+    <image src="../../images/logo.png" style="height:200rpx;width:400rpx"></image>
+    <view style='margin-top:40rpx'>
+      神族九帝，永不言弃
+    </view>
+  </view>
+</template>
+<!-- header end -->
