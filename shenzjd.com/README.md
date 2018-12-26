@@ -82,9 +82,9 @@ https://shenzjd.com/wp-json/wp/v2/posts?filter[orderby]=rand&filter[cat]=2&filte
 
 （11）获取指定文章的数据
 
-https://shenzjd.com/wp-json/wp/v2/posts/189
+https://shenzjd.com/wp-json/wp/v2/posts/1339
 
-得到ID为189的文章数据
+得到ID为1339的文章数据
 
  
 
