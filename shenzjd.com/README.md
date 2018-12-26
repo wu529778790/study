@@ -58,9 +58,9 @@ filter[author_name]=jinyun设置指定作者名字
 
 （8）按关键词搜索文章
 
-https://shenzjd.com/wp-json/wp/v2/posts?filter[s]=金云
+https://shenzjd.com/wp-json/wp/v2/posts?filter[s]=线报
 
-filter[s]=金云 ：按给定的关键词搜索文章，返回包含“金云”关键词的文章。
+filter[s]=线报 ：按给定的关键词搜索文章，返回包含“金云”关键词的文章。
 
 （9）获取随机文章
 
