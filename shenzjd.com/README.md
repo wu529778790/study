@@ -1,3 +1,7 @@
+# 接口文档整理
+1，获取最新文章(默认获取十篇最新文章)
+/wp-json/wp/v2/posts
+
 # WordPress版微信小程序
 
 ![wordpress微信小程序](https://www.watch-life.net/images/2017/06/winxinapp-wordpress-watch-life-new-700.jpg)
