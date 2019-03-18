@@ -1,3 +1,20 @@
+
+用到的技术栈
+
+react 
+
+redux 
+
+react-redux 
+
+react-router 
+
+immutable.js 
+
+styled-components 
+
+react-loadable
+
 ## 项目建立
 
 ```
@@ -141,3 +158,4 @@ const LoadableComponent = Loadable({
 
 export default () => <LoadableComponent/>
 ```
+
