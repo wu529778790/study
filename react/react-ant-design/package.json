@@ -1,0 +1,37 @@
+{
+  "name": "react-ant-design",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.15.1",
+    "axios": "^0.18.0",
+    "babel-plugin-import": "^1.11.0",
+    "customize-cra": "^0.2.12",
+    "jsonp": "^0.2.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "react": "^16.8.4",
+    "react-app-rewired": "^2.1.1",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.4.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
